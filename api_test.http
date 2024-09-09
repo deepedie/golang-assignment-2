@@ -1,0 +1,40 @@
+### Mengirimkan permintaan GET ke endpoint API
+GET http://localhost:8080/orders
+
+### Mengirimkan permintaan POST dengan JSON body
+POST http://localhost:8080/orders
+Content-Type: application/json
+
+{
+  "orderedAt": "2019-11-09",
+	"customer_name": "Jefry",
+	"items"	: [
+	  {
+	    "item_code": "123",
+	    "description": "description",
+	    "quantity": 1
+	  }
+	]
+}
+
+### Mengirimkan permintaan PUT dengan JSON body
+PUT http://localhost:8080/orders/1
+Content-Type: application/json
+
+{
+    "customerName": "jefry",
+	"items": [
+		{
+		  "itemCode": string,
+		  "description": string,
+		  "quantity": number
+		}
+	]
+	
+}
+
+### Mengirimkan permintaan DELETE dengan id param
+DELETE http://localhost:8080/orders/1
+Content-Type: application/json
+
+

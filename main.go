@@ -1,16 +1,24 @@
 package main
 
 import (
-	"ddd_example/app/controller"
-	"ddd_example/app/repository"
-	"ddd_example/app/service"
-	"ddd_example/config"
+	"assignment-2/app/controller"
+	"assignment-2/app/model"
+	"assignment-2/app/repository"
+	"assignment-2/app/service"
+	"assignment-2/config"
+
+	"log"
+
 	"github.com/gin-gonic/gin"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func main() {
 	// Initialize Database
 	config.InitDB()
+
+	InitDB()
 
 	// Initialize Repository
 	orderRepo := repository.NewOrderRepository(config.GetDB())
@@ -34,14 +42,25 @@ func main() {
 	router.Run(":8080")
 }
 
+// const (
+// 	host     = "localhost"
+// 	port     = "5432"
+// 	user     = "jefrys"
+// 	password = "postgres"
+// 	dbname   = "assignment-2"
+// )
+
+var db *gorm.DB
+
 func InitDB() {
-	dsn := "host=localhost user=youruser password=yourpass dbname=yourdb port=5432 sslmode=disable"
+	// config := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=disable", host, user, password, dbname, port)
+	dsn := "host=localhost dbname=postgres port=5432 sslmode=disable"
 	var err error
-	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+	db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect to the database:", err)
 	}
 
 	// AutoMigrate models
-	DB.AutoMigrate(&model.Order{}, &model.Item{})
+	db.Debug().AutoMigrate(&model.Order{}, &model.Item{})
 }

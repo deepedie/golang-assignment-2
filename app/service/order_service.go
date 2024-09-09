@@ -1,8 +1,8 @@
 package service
 
 import (
-	"ddd_example/app/model"
-	"ddd_example/app/repository"
+	"assignment-2/app/model"
+	"assignment-2/app/repository"
 )
 
 type OrderService interface {

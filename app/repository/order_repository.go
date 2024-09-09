@@ -1,7 +1,8 @@
 package repository
 
 import (
-	"ddd_example/app/model"
+	"assignment-2/app/model"
+
 	"gorm.io/gorm"
 )
 

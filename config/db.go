@@ -3,6 +3,7 @@ package config
 import (
 	"fmt"
 	"log"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -10,7 +11,7 @@ import (
 var DB *gorm.DB
 
 func InitDB() {
-	dsn := "host=localhost user=youruser password=yourpass dbname=yourdb port=5432 sslmode=disable"
+	dsn := "host=localhost user=jefrys password=postgres dbname=postgres port=5432 sslmode=disable"
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {

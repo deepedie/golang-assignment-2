@@ -1,9 +1,11 @@
 package controller
 
 import (
-	"ddd_example/app/model"
-	"ddd_example/app/service"
+	"assignment-2/app/model"
+	"assignment-2/app/service"
 	"net/http"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -52,9 +54,17 @@ func (c *OrderController) UpdateOrder(ctx *gin.Context) {
 
 func (c *OrderController) DeleteOrder(ctx *gin.Context) {
 	orderID := ctx.Param("id")
-	if err := c.orderService.DeleteOrder(uint(orderID)); err != nil {
+
+	id, err := strconv.ParseUint(orderID, 10, 32)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"error": "Invalid order ID"})
+		return
+	}
+
+	if err := c.orderService.DeleteOrder(uint(id)); err != nil {
 		ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
+
 	ctx.JSON(http.StatusOK, gin.H{"message": "Delete Data Success", "success": true})
 }
