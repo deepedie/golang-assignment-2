@@ -25,16 +25,16 @@ Content-Type: application/json
     "customerName": "jefry",
 	"items": [
 		{
-		  "itemCode": string,
-		  "description": string,
-		  "quantity": number
+		  "itemCode": "123",
+		  "description": "testing",
+		  "quantity": 12
 		}
 	]
 	
 }
 
 ### Mengirimkan permintaan DELETE dengan id param
-DELETE http://localhost:8080/orders/1
+DELETE http://localhost:8080/orders/2
 Content-Type: application/json
 
 
