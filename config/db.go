@@ -1,6 +1,7 @@
 package config
 
 import (
+	"assignment-2/app/model"
 	"fmt"
 	"log"
 
@@ -11,9 +12,12 @@ import (
 var DB *gorm.DB
 
 func InitDB() {
-	dsn := "host=localhost user=jefrys password=postgres dbname=postgres port=5432 sslmode=disable"
+	dsn := "host=localhost user=postgres password=postgre dbname=postgres port=5432 sslmode=disable"
 	var err error
 	DB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+	DB.Debug().AutoMigrate(&model.Order{}, &model.Item{})
+
 	if err != nil {
 		log.Fatal("Failed to connect to the database:", err)
 	}
